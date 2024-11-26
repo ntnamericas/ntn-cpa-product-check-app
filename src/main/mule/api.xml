@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:apikit="http://www.mulesoft.org/schema/mule/mule-apikit" xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd
+http://www.mulesoft.org/schema/mule/mule-apikit http://www.mulesoft.org/schema/mule/mule-apikit/current/mule-apikit.xsd">
+	<apikit:config outboundHeadersMapName="outboundHeadersMapName" httpStatusVarName="httpStatus" doc:name="Router" doc:id="2b0498d6-deaf-493a-8b6b-cdbfc15df81d" name="Router" api="ntn-cpa-product-check-app.raml" >
+		<apikit:flow-mappings >
+			<apikit:flow-mapping resource="/productCheck" action="get" flow-ref="cpa-product-check-sf-to-jdeFlow" />
+			<apikit:flow-mapping resource="/productCheck/group" action="get" flow-ref="cpa-product-group-check-sf-to-jdeFlow" />
+		</apikit:flow-mappings>
+	</apikit:config>
+	<flow name="apiFlow" doc:id="34cebad8-7d68-4dde-9c69-4adb07257012" >
+		<http:listener doc:name="Listener" doc:id="794b4c61-ecac-4630-a676-2e6fbfcc85b0" config-ref="HTTP_Listener_config" path="/*"/>
+		<apikit:router doc:name="APIkit Router" doc:id="e80477cb-32bd-44e7-9038-9bdc52a89d7c" config-ref="Router"/>
+	</flow>
+</mule>

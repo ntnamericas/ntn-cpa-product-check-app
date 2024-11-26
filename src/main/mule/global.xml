@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:wsc="http://www.mulesoft.org/schema/mule/wsc"
+	xmlns:email="http://www.mulesoft.org/schema/mule/email" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="
+http://www.mulesoft.org/schema/mule/email http://www.mulesoft.org/schema/mule/email/current/mule-email.xsd http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/wsc http://www.mulesoft.org/schema/mule/wsc/current/mule-wsc.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="d9401512-2a43-4cc0-ade0-d63179368527" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<email:smtp-config name="Email_SMTP" doc:name="Email SMTP" doc:id="dc35f0ba-327e-4b3a-ac5b-ff433b00a543" >
+		<email:smtp-connection host="smtp.office365.com" user="mulesoftsmtpuser@ntnusa.com" password="G#342148323062um">
+			<email:properties >
+				<email:property key="mail.smtp.starttls.enable" value="true" />
+			</email:properties>
+		</email:smtp-connection>
+	</email:smtp-config>
+
+	<wsc:config name="Web_Service_Consumer_Config"
+		doc:name="Web Service Consumer Config"
+		doc:id="22b36541-6a65-4502-8961-781bd65a8967">
+		<wsc:connection
+			wsdlLocation="https://ntnpy.opc.oracleoutsourcing.com/PY920/CPQPartsManager?wsdl" service="CPQPartsManagerService" port="CPQPartsManagerPort" address="https://ntnpy.opc.oracleoutsourcing.com:443/PY920/CPQPartsManager">
+			<wsc:custom-transport-configuration>
+				<wsc:default-http-transport-configuration
+					timeout="120000" />
+			</wsc:custom-transport-configuration>
+			<wsc:web-service-security
+				mustUnderstand="false" securityHeadersOrder="TimestampAtEnd">
+				<wsc:username-token-security-strategy
+					username="BIZSERVICE" password="SERVICE" addNonce="true"
+					addCreated="true" />
+			</wsc:web-service-security>
+		</wsc:connection>
+	</wsc:config>
+
+		
+</mule>

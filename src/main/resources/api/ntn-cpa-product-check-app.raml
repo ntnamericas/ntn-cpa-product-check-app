@@ -1,0 +1,35 @@
+#%RAML 1.0
+title: ntn-cpa-product-check-app
+
+version: v1
+baseUri: https://{app-name}/api/{version}
+
+protocols:
+  - HTTPS
+
+mediaType: [application/xml] 
+uses:
+  dt: /libraries/data-types.raml
+  rt: /libraries/resource-type.raml
+resourceTypes:
+  update: !include /resource-types/create-update.raml
+
+/productCheck:
+  get:
+    displayName: get the CPA Product check details
+    description : 
+      resource fetches the CPA group details from salesforce and updates it to JDE
+    responses:
+        200:
+          description: Successful 
+          body:      
+  /group:
+    get:
+      displayName: get the CPA Product group check details
+      description : 
+        resource fetches the CPA group details from salesforce and updates it to JDE
+      responses:
+          200:
+            description: Successful 
+            body:    
+  
