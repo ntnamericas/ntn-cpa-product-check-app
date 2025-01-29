@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:munit="http://www.mulesoft.org/schema/mule/munit" xmlns:munit-tools="http://www.mulesoft.org/schema/mule/munit-tools"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xsi:schemaLocation="
+		http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+		http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/current/mule-munit.xsd
+		http://www.mulesoft.org/schema/mule/munit-tools  http://www.mulesoft.org/schema/mule/munit-tools/current/mule-munit-tools.xsd">
+	<munit:config name="cpa-product-check-sf-to-jde-test-suite.xml" />
+	<munit:test name="cpa-product-check-sf-to-jde-test-suite-cpa-product-check-sf-to-jdeFlowTest" doc:id="ee0d19d4-3a25-496f-a9bf-67e77b310953" description="Test" expectedErrorType="ANY">
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock when" doc:id="d8c9ede6-cab0-4341-bb2f-6c166e43a6f7" processor="wsc:consume">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="getPartsDetail" attributeName="operation" />
+				</munit-tools:with-attributes>
+			</munit-tools:mock-when>
+		</munit:behavior>
+		<munit:execution >
+			<munit:set-event doc:name="Set Event" doc:id="479bab4d-1448-46f9-94de-117101a72f47" >
+				<munit:attributes value='#[{queryParams:{Part_Number__c : "123" , Account_JDE_Address__c: "123" , Id: "123" }}]' />
+			</munit:set-event>
+			<flow-ref doc:name="Flow-ref to cpa-product-check-sf-to-jdeFlow" doc:id="103618e0-9fdd-44f3-85bb-5a18bb8ec9bd" name="cpa-product-check-sf-to-jdeFlow"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert-that doc:name="Assert that" doc:id="abc1a3a1-9c0f-4929-96d5-109f9ee8165b" expression="#[payload]" is="#[MunitTools::notNullValue()]"/>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="cpa-product-group-check-sf-to-jde-test-suite-cpa-product-group-check-sf-to-jdeFlowTest" doc:id="472c2866-15ba-4c74-8d42-d00090ed7236" description="Test">
+		<munit:execution >
+			<munit:set-event doc:name="Set Event" doc:id="c7671ed5-f575-46ae-bc7e-dd28c24b70fd" >
+				<munit:attributes value='#[{queryParams:{ShipTo : "123"}}]' />
+			</munit:set-event>
+			<flow-ref doc:name="Flow-ref to cpa-product-group-check-sf-to-jdeFlow" doc:id="0a295700-0fc2-4c8a-8387-748754034c71" name="cpa-product-group-check-sf-to-jdeFlow" />
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert-that doc:name="Assert that" doc:id="93f75518-2d44-4369-9637-edc68a0d6d03" expression="#[payload]" is="#[MunitTools::notNullValue()]" />
+		</munit:validation>
+	</munit:test>
+	<munit:test name="cpa-product-check-sf-to-jde-test-suite-cpa-product-check-sf-to-jdeFlowTest1" doc:id="713401dc-e159-4484-a47d-01ed220328f8" description="Test">
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock when" doc:id="7a903afe-9e0c-45f1-b120-1ed2fb873a1c" processor="wsc:consume" >
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="getPartsDetail" attributeName="operation" />
+				</munit-tools:with-attributes>
+			</munit-tools:mock-when>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to cpa-product-check-sf-to-jdeFlow" doc:id="92ce3dde-580e-42f8-b280-cb420620ca3c" name="cpa-product-check-sf-to-jdeFlow" />
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert-that doc:name="Assert that" doc:id="9e30269b-3d62-4f3f-808c-3b45f1ebcb33" expression="#[payload]" is="#[MunitTools::notNullValue()]" />
+		</munit:validation>
+	</munit:test>
+	<munit:test name="cpa-product-check-sf-to-jde-test-suite-cpa-product-check-sf-to-jdeFlowTest2" doc:id="b35179dd-b5ad-46cb-b71f-1239b4baa51d" description="Test" expectedErrorType="ANY" >
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock when" doc:id="cdb0781b-eee3-4ecc-a80e-7b9512423621" processor="wsc:consume" >
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="getPartsDetail" attributeName="operation" />
+				</munit-tools:with-attributes>
+			</munit-tools:mock-when>
+		</munit:behavior>
+		<munit:execution >
+			<munit:set-event doc:name="Set Event" doc:id="38477b64-22ab-4c8b-adf2-eaf2f384f8f4" >
+				<munit:attributes value='#[{queryParams:{Part_Number__c : "123" , Account_JDE_Address__c: "123" , Id: "123" }}]' />
+			</munit:set-event>
+			<flow-ref doc:name="Flow-ref to cpa-product-check-sf-to-jdeFlow" doc:id="d4031646-0916-4431-9737-93b1f51dd94e" name="cpa-product-check-sf-to-jdeFlow" />
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert-that doc:name="Assert that" doc:id="33086db3-ae5d-41bc-b595-236cf54f778c" expression="#[payload]" is="#[MunitTools::notNullValue()]" />
+		</munit:validation>
+	</munit:test>
+	<munit:test name="api-test-suite-apiFlowTest" doc:id="08c64ca4-2ba7-4eb8-9e84-7529ed12e909" description="Test" >
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock when" doc:id="6bd56b64-d2ce-4bc2-a515-5b045983c082" processor="apikit:router">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="APIkit Router" attributeName="doc:name" />
+				</munit-tools:with-attributes>
+			</munit-tools:mock-when>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to apiFlow" doc:id="b6aff46e-6a67-4415-8831-cb0f66776f94" name="apiFlow" />
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert-that doc:name="Assert that" doc:id="e3fad367-a377-435a-a521-b455f9d68327" expression="#[payload]" is="#[MunitTools::notNullValue()]"/>
+		</munit:validation>
+	</munit:test>
+
+
+</mule>

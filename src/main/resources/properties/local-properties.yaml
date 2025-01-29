@@ -1,0 +1,21 @@
+http:
+  host: "0.0.0.0"
+  port: "8081"
+  timeout: "15000"
+
+paURL: "https://ntn-pricingandavailability-sf-sync-dev-tpw8fz.89unfu.usa-e2.cloudhub.io/api/pricing"
+# paURL: "https://ntn-pricingandavailability-sf-sync-dev"
+
+smtp:
+  host: "smtp.office365.com"
+  port: "25"
+  to: "simran.modi@prowesssoft.com"  
+  
+app.env: "LOCAL"  
+
+
+wsdl:
+  location: "https://ntnpy.opc.oracleoutsourcing.com/PY920/CPQPartsManager?wsdl"
+  svc: "CPQPartsManagerService"
+  port: "CPQPartsManagerPort"
+  address: "https://ntnpy.opc.oracleoutsourcing.com:443/PY920/CPQPartsManager"
