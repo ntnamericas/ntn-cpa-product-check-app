@@ -1,0 +1,22 @@
+api:
+  id: "12345678" 
+
+app:
+  name:  "pricing-availability" 
+  version: "1.0.0"  
+  env: "PY/UAT"
+http:
+  host: "0.0.0.0"
+  port: "8081"
+  
+smtp:
+  host: "smtp.office365.com"
+  port: "25"  
+  to: "suman.chatterjee@prowesssoft.com,simran.modi@prowesssoft.com"
+  
+wsdl:
+  location: "https://ntnpy.opc.oracleoutsourcing.com/PY920/CPQPartsManager?wsdl"
+  service: "CPQPartsManagerService"
+  port: "CPQPartsManagerPort"
+  address: "https://ntnpy.opc.oracleoutsourcing.com:443/PY920/CPQPartsManager"
+  userName: "BIZSERVICE"

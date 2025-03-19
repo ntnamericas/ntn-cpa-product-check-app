@@ -1,28 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<mule xmlns:wsc="http://www.mulesoft.org/schema/mule/wsc"
-	xmlns:email="http://www.mulesoft.org/schema/mule/email" xmlns:http="http://www.mulesoft.org/schema/mule/http"
-	xmlns="http://www.mulesoft.org/schema/mule/core"
-	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="
+<mule xmlns:secure-properties="http://www.mulesoft.org/schema/mule/secure-properties"
+	xmlns:wsc="http://www.mulesoft.org/schema/mule/wsc" xmlns:email="http://www.mulesoft.org/schema/mule/email"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="
 http://www.mulesoft.org/schema/mule/email http://www.mulesoft.org/schema/mule/email/current/mule-email.xsd http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
 http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
-http://www.mulesoft.org/schema/mule/wsc http://www.mulesoft.org/schema/mule/wsc/current/mule-wsc.xsd">
-	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="d9401512-2a43-4cc0-ade0-d63179368527" >
-		<http:listener-connection host="0.0.0.0" port="8081" />
-	</http:listener-config>
-	<email:smtp-config name="Email_SMTP" doc:name="Email SMTP" doc:id="dc35f0ba-327e-4b3a-ac5b-ff433b00a543" >
-		<email:smtp-connection host="smtp.office365.com" user="mulesoftsmtpuser@ntnusa.com" password="G#342148323062um">
-			<email:properties >
-				<email:property key="mail.smtp.starttls.enable" value="true" />
-			</email:properties>
-		</email:smtp-connection>
-	</email:smtp-config>
-
+http://www.mulesoft.org/schema/mule/wsc http://www.mulesoft.org/schema/mule/wsc/current/mule-wsc.xsd
+http://www.mulesoft.org/schema/mule/secure-properties http://www.mulesoft.org/schema/mule/secure-properties/current/mule-secure-properties.xsd">
+	<secure-properties:config name="Secure_Properties_Config" doc:name="Secure Properties Config" doc:id="04388487-416b-41ce-a0c4-d2ab6941bffb" file="properties/${env}-secure-properties.yaml" key="${secure.key}" >
+		<secure-properties:encrypt algorithm="Blowfish" />
+	</secure-properties:config>
+	<configuration-properties doc:name="Configuration properties" doc:id="9e6af5b1-5c58-4479-a879-41d64021ede3" file="properties/common.yaml" />
+	<global-property doc:name="Global Property" doc:id="07fe7494-397a-446e-ac01-0384cc11ea19" name="secure.key" value="${env.key}" />
+	<configuration-properties doc:name="Configuration properties" doc:id="acc81b86-35ad-436f-8ac4-a072bb29dc75" file="properties/${env}-properties.yaml" />
 	<wsc:config name="Web_Service_Consumer_Config"
 		doc:name="Web Service Consumer Config"
-		doc:id="22b36541-6a65-4502-8961-781bd65a8967">
+		doc:id="04292815-3018-419c-968b-f541b28cb306">
 		<wsc:connection
-			wsdlLocation="https://ntnpy.opc.oracleoutsourcing.com/PY920/CPQPartsManager?wsdl" service="CPQPartsManagerService" port="CPQPartsManagerPort" address="https://ntnpy.opc.oracleoutsourcing.com:443/PY920/CPQPartsManager">
+			wsdlLocation="${wsdl.location}" service="${wsdl.service}" port="${wsdl.port}" address="${wsdl.address}">
+			<reconnection >
+				<reconnect frequency="${max.frequency}" count="${max.retries}"/>
+			</reconnection>
 			<wsc:custom-transport-configuration>
 				<wsc:default-http-transport-configuration
 					timeout="120000" />
@@ -30,11 +29,24 @@ http://www.mulesoft.org/schema/mule/wsc http://www.mulesoft.org/schema/mule/wsc/
 			<wsc:web-service-security
 				mustUnderstand="false" securityHeadersOrder="TimestampAtEnd">
 				<wsc:username-token-security-strategy
-					username="BIZSERVICE" password="SERVICE" addNonce="true"
+					username="${wsdl.userName}" password="${secure::wsdl.password}" addNonce="true"
 					addCreated="true" />
 			</wsc:web-service-security>
 		</wsc:connection>
 	</wsc:config>
-
-		
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="65ba93a2-3542-4498-a4c9-a3c6c40b2576" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<email:smtp-config name="Email_SMTP"
+		doc:name="Email SMTP" doc:id="ab93741b-ad48-4989-be1e-4b46f5a19efe">
+		<email:smtp-connection host="${smtp.host}"
+			port="${smtp.port}" user="${secure::smtp.user}"
+			password="${secure::smtp.password}" connectionTimeout="10">
+			<email:properties>
+				<email:property key="mail.smtp.starttls.enable"
+					value="true" />
+			</email:properties>
+		</email:smtp-connection>
+	</email:smtp-config>
+	<configuration doc:name="Configuration" doc:id="45059eca-c782-4830-a746-c33cdc9f9dc8" defaultErrorHandler-ref="global-error-handler" />
 </mule>
