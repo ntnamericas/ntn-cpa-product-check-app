@@ -9,7 +9,7 @@ http:
 smtp:
   host: "smtp.office365.com"
   port: "25"  
-  to: "donotreply@ntnusa.com,suman.chatterjee@prowesssoft.com,simran.modi@prowesssoft.com"
+  to: "donotreply@ntnusa.com,ntnmule@prowesssoft.com"
 wsdl:
   location: "https://ntnpd.opc.oracleoutsourcing.com/PY920/CPQPartsManager?wsdl"
   service: "CPQPartsManagerService"
