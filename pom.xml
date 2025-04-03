@@ -4,7 +4,7 @@
 
 	<groupId>com.mycompany</groupId>
 	<artifactId>ntn-cpa-product-check-app</artifactId>
-	<version>1.0.0-rc1</version>
+	<version>1.0.0-rc3</version>
 	<packaging>mule-application</packaging>
 
 	<name>ntn-cpa-product-check-app</name>
@@ -14,7 +14,7 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
 		<app.runtime>4.5.1</app.runtime>
-		<mule.maven.plugin.version>4.0.0</mule.maven.plugin.version>
+		<mule.maven.plugin.version>4.3.0</mule.maven.plugin.version>
 		<munit.version>3.0.0</munit.version>
 	</properties>
 
@@ -114,7 +114,7 @@
 		<dependency>
 			<groupId>org.mule.connectors</groupId>
 			<artifactId>mule-email-connector</artifactId>
-			<version>1.7.4</version>
+			<version>1.7.5</version>
 			<classifier>mule-plugin</classifier>
 		</dependency>
 	</dependencies>
