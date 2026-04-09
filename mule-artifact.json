@@ -1,4 +1,59 @@
 {
-    "minMuleVersion": "4.6.2",
-    "javaSpecificationVersions": ["17"]
+  "configs": [
+    "cpa-product-group-check-sf-to-jde.xml",
+    "global.xml",
+    "global-error-handler.xml",
+    "cpa-product-check-sf-to-jde.xml",
+    "api.xml"
+  ],
+  "secureProperties": [],
+  "supportedJavaVersions": [],
+  "redeploymentEnabled": true,
+  "name": "com.mycompany:ntn-cpa-product-check-app:1.0.0-rc5",
+  "minMuleVersion": "4.6.2",
+  "requiredProduct": "MULE_EE",
+  "classLoaderModelLoaderDescriptor": {
+    "id": "mule",
+    "attributes": {
+      "exportedPackages": [],
+      "exportedResources": [
+        "api/data-types/response/health-status.raml",
+        "api/data-types/response/sfInput.raml",
+        "api/examples/200-health-payload.raml",
+        "api/examples/201-generic-payload.raml",
+        "api/examples/400-generic-payload.raml",
+        "api/examples/401-generic-payload.raml",
+        "api/examples/403-generic-payload.raml",
+        "api/examples/404-generic-payload.raml",
+        "api/examples/500-generic-payload.raml",
+        "api/examples/502-generic-payload.raml",
+        "api/examples/504-generic-payload.raml",
+        "api/exchange.json",
+        "api/libraries/data-types.raml",
+        "api/libraries/resource-type.raml",
+        "api/ntn-cpa-product-check-app.raml",
+        "api/resource-types/create-only.raml",
+        "api/resource-types/create-update.raml",
+        "api/resource-types/read-only.raml",
+        "api.xml",
+        "application-types.xml",
+        "cpa-product-check-sf-to-jde.xml",
+        "cpa-product-group-check-sf-to-jde.xml",
+        "global-error-handler.xml",
+        "global.xml",
+        "log4j2.xml",
+        "properties/common.yaml",
+        "properties/dev-properties.yaml",
+        "properties/dev-secure-properties.yaml",
+        "properties/prod-properties.yaml",
+        "properties/prod-secure-properties.yaml",
+        "properties/uat-properties.yaml",
+        "properties/uat-secure-properties.yaml"
+      ]
+    }
+  },
+  "bundleDescriptorLoader": {
+    "id": "mule",
+    "attributes": {}
+  }
 }

@@ -4,7 +4,7 @@
 
 	<groupId>com.mycompany</groupId>
 	<artifactId>ntn-cpa-product-check-app</artifactId>
-	<version>1.0.0-rc5</version>
+	<version>1.0.0-rc6</version>
 	<packaging>mule-application</packaging>
 
 	<name>ntn-cpa-product-check-app</name>
@@ -13,7 +13,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-		<app.runtime>4.6.2</app.runtime>
+		<app.runtime>4.9.3</app.runtime>
 		<mule.maven.plugin.version>4.3.0</mule.maven.plugin.version>
 		<munit.version>3.0.0</munit.version>
 	</properties>
